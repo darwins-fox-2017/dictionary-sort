@@ -17,7 +17,7 @@ rl.on('line', (line) => {
       // Masukin ke var sementara [diky - 0]
       var temp = dictionaryWords[i]
       // console.log('nilai temp : ' + temp);
-      for (var j = i - 1; j >= 0 && dictionaryWords[j] > temp; j--) {
+      for (var j = i - 1; j >= 0 && dictionaryWords[j].toLowerCase() > temp.toLowerCase(); j--) {
         // console.log('nilai j : ' + j + ' nilai dic' + dictionaryWords[j]);
         dictionaryWords[j + 1] = dictionaryWords[j]
         // console.log('lalu : ' + dictionaryWords[j + 1] + ' j ' + j);
