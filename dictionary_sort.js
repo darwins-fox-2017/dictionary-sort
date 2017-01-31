@@ -35,8 +35,6 @@ rl.on('line', (line) => {
       console.log(newwords[i]);
     }
   }
-
-
 }).on('close', () => {
   console.log('Have a great day!');
   process.exit(0);
