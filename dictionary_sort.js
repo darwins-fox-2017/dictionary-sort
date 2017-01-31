@@ -1,9 +1,11 @@
 
 //var words=['pulpen',"laptop",'buku'];
+console.log('alfa'.toLowerCase);
+
 function dictonari(words) {
 for (var i = 1; i < words.length; i++) {
     for (var j = 0; j<i; j++) {
-      if (words[i]<words[j]) {
+      if (words[i].toLowerCase()<words[j].toLowerCase()) {
         var wordsI=words[i];
         var wordsJ=words[j];
         words[i]=wordsJ;
@@ -29,11 +31,12 @@ rl.on('line', (line) => {
      rl.setPrompt('masukan kata lagi >')
      rl.prompt();
   }else{
-    console.log('kamus anda mempunyai 4 kata');
+    console.log('kamus anda mempunyai kata');
     var newwords=dictonari(words);
     for (var i = 0; i < newwords.length; i++) {
       console.log(newwords[i]);
     }
+    words=[];
   }
 }).on('close', () => {
   console.log('Have a great day!');
