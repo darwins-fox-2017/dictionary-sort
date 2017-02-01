@@ -25,6 +25,7 @@ rl.on('line', (line) => {
       dictionaryWords[j + 1] = temp
     }
     console.log(dictionaryWords.join('\n'));
+    process.exit(0);
   } else {
     rl.setPrompt('Type another word (or press enter to finish : >')
     dictionaryWords.push(line)
