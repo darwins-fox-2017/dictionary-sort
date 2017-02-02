@@ -15,31 +15,34 @@ const rl = readline.createInterface({
 
 rl.prompt()
 
-let dictionary = []
-let newArr = []
+let arr = []
+let sort = []
 
-rl.on('line', (line) => {
-  if (line === '') {
+
+rl.on('line', (words) => {
+  if (words === '') {
     rl.setPrompt('>  ')
-    console.log('> Congratulations! Your dictionary has ' + dictionary.length + ' words : ')
-
-    var len = dictionary.length;
-
-    for (var i = 0; i < len; i++) {
-      var tmp = dictionary[i];
-      for (var j = i - 1; j >= 0 && (dictionary[j] > tmp); j--) {
-          dictionary[j + 1] = dictionary[j];
-      }
-      dictionary[j + 1] = tmp;
-    }
-
-    for (let x=0; x<dictionary.length; x++) {
-      console.log('> ', dictionary[x])
-    }
-  } else {
-    if (dictionary.length >= 0) { rl.setPrompt('> Type another word (or enter to finish) : ') }
-    dictionary.push(line)
+    console.log('> Congratulations! Your dictionary has ' + arr.length + ' words : ')
   }
 
-  rl.prompt()
-});
+  if (!words) {
+    for ( var i = 0; i < arr.length; i++) {
+      let smallest = i;
+
+      for ( var j = i + 1; j < arr.length; j++) {
+        if (arr[j].toLowerCase() <  arr[smallest].toLowerCase()) {
+          smallest = j;
+        }
+      }
+      var tmp = arr[i];
+      arr[i] = arr[smallest];
+      arr[smallest] = tmp
+    }
+    console.log('>',String(arr));
+    rl.close()
+  } else {
+    rl.setPrompt("> Type another word (or enter to finish) :  ");
+    arr.push(words);
+    rl.prompt();
+  }
+})
