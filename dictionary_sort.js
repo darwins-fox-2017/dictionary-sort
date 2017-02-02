@@ -9,62 +9,37 @@ const readline = require('readline');
 // your code here to initialize the program and take user input
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
+  prompt: '> Type a Word : '
 });
 
-// function dictionary_sort(arr) {
-//   var smallest = arr[0]
-//   var smallIndex = 0
-//   for (var i = 0; i < arr.length; i++) {
-//     if (arr[i] < arr[smallest]){
-//       smallest = arr[i]
-//       smallIndex = i
-//       var temp = smallest
-//       arr.splice(arr)
-//     }
-//   }
-//
-//
-//   }
+rl.prompt()
 
-  var arr= []
-  function dictionary_sort(arr) {
-    var values, i, j
-    for(i = 0; i<arr.length; i++){
-      values = arr[i]
-      for( j= i-1; j>=0 && arr[j] > values; j--){
-        arr[j+1]=arr[j]
+let dictionary = []
+let newArr = []
+
+rl.on('line', (line) => {
+  if (line === '') {
+    rl.setPrompt('>  ')
+    console.log('> Congratulations! Your dictionary has ' + dictionary.length + ' words : ')
+
+    var len = dictionary.length;
+
+    for (var i = 0; i < len; i++) {
+      var tmp = dictionary[i];
+      for (var j = i - 1; j >= 0 && (dictionary[j] > tmp); j--) {
+          dictionary[j + 1] = dictionary[j];
       }
-      arr[j+1] = values
+      dictionary[j + 1] = tmp;
     }
-    return arr.join('\n')
+
+    for (let x=0; x<dictionary.length; x++) {
+      console.log('> ', dictionary[x])
+    }
+  } else {
+    if (dictionary.length >= 0) { rl.setPrompt('> Type another word (or enter to finish) : ') }
+    dictionary.push(line)
   }
 
-
-// rl.setPrompt('Type a word :');
-// var arr = [];
-// rl.prompt();
-// rl.on('line', (input) => {
-//   if (input === '') {
-//     rl.close();
-//     dictionary_sort(arr);
-//   } else {
-//     rl.setPrompt('Type another word (or press enter to finish):');
-//     arr.push(input);
-//     rl.prompt();
-//   }
-// })
-
-rl.setPrompt('Type a word :')
-rl.prompt()
-rl.on('line', (input) => {
-if(input==""){
-rl.close()
-} else {
-  rl.setPrompt('Type another word (or press enter to finish) :')
-  arr.push(input)
   rl.prompt()
-}
-}).on('close',() => {
-  console.log(`Congratulation! Your dictionary has ${arr.length} words:\n `+ dictionary_sort(arr));
 });
